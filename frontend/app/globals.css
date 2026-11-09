@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@theme {
+  /* Boutique Wellness Palette */
+  --color-background: #F9F8F6;
+  /* Alabaster / Warm Stone */
+  --color-surface: #FFFFFF;
+
+  /* Primary: Deep Forest Green */
+  --color-primary: #274029;
+  --color-primary-hover: #1f3321;
+  --color-primary-light: #EBF0EC;
+  /* Very pale green */
+
+  /* Accent: Soft Terracotta */
+  --color-accent: #E27D60;
+  --color-accent-light: #FDF2EF;
+
+  /* Typography */
+  --color-text-main: #292524;
+  /* Warm Dark Stone */
+  --color-text-muted: #78716C;
+  /* Medium Warm Gray */
+
+  --color-border: #E7E5E4;
+
+  /* Custom Status Colors */
+  --color-status-success-bg: #EBF0EC;
+  --color-status-success-text: #274029;
+  --color-status-warning-bg: #FDF2EF;
+  --color-status-warning-text: #E27D60;
+
+  /* Flat Design - No Shadows */
+  --shadow-none: none;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text-main);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+}
