@@ -1,14 +1,45 @@
+
+# Dependencies
 node_modules/
+
+# Build files
 dist/
+build/
+coverage/
+.next/
+out/
+
+# Environment variables and secrets
 .env
 .env.*
 !.env.example
-__pycache__/
-*.pyc
+
+# Python virtual environments
 .venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
 .pytest_cache/
 .ruff_cache/
+.mypy_cache/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# MediMind generated data
 ai-service/data/uploads/*
 !ai-service/data/uploads/.gitkeep
+ai-service/data/qdrant*/
+
+# IDE files
+.idea/
+.vscode/
+
+# OS files
 .DS_Store
-coverage/
+Thumbs.db

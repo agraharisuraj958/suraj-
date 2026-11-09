@@ -126,8 +126,8 @@ All AI output carries a "not a diagnosis" disclaimer.
 ## Commands
 - Infra: `docker compose up -d`
 - Node: `cd backend-node && npm run dev`
-- AI (Windows): `cd ai-service && .venv\Scripts\activate && uvicorn app.main:app --reload --port 8000`
-- AI (Mac/Linux): `cd ai-service && source .venv/bin/activate && uvicorn app.main:app --reload --port 8000`
+- AI (Windows): `cd ai-service && ./run_dev.ps1`
+- AI (Mac/Linux): `cd ai-service && AI_SERVICE_HOST=127.0.0.1 AI_SERVICE_PORT=8000 uvicorn app.main:app --reload --host $AI_SERVICE_HOST --port $AI_SERVICE_PORT`
 - Dev OS: Windows (run setup.sh in Git Bash)
 EOF
 

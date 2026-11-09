@@ -9,6 +9,7 @@ sse-starlette
 # LLM providers
 anthropic
 openai
+google-genai
 # RAG
 qdrant-client
 fastembed
