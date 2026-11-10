@@ -39,55 +39,14 @@ export default function KnowledgeAssistant() {
         }
     ]);
 
-    const handleSearch = () => {
-        if (!searchQuery.trim() || isSearching) return;
-        const queryText = searchQuery;
-        setSearchQuery("");
-
-        const newMsgId = Date.now().toString();
-        setMessages(prev => [...prev, { id: newMsgId, role: "user", text: queryText }]);
-        setIsSearching(true);
-
-        setTimeout(() => {
-            let aiResponse = "Based on indexed literature and consensus statements, primary interventions prioritize lifestyle modification alongside baseline biomarker evaluation before titration of pharmacological agents.";
-            let citation: Citation = {
-                id: `c-${Date.now()}`,
-                doc: "Clinical Practice Guidelines Compendium 2026",
-                page: 18,
-                excerpt: "Initial management should confirm diagnosis through repeated measurements and rule out secondary causes prior to establishing maintenance regimens."
-            };
-
-            const q = queryText.toLowerCase();
-            if (q.includes("diabetes") || q.includes("glucose") || q.includes("hba1c")) {
-                aiResponse = "Per ADA Standards of Care 2026, first-line therapy for type 2 diabetes remains Metformin and comprehensive lifestyle management, combined with SGLT2 inhibitors or GLP-1 RAs in patients with established ASCVD, heart failure, or CKD.";
-                citation = {
-                    id: `c-${Date.now()}`,
-                    doc: "Standards of Medical Care in Diabetes 2026",
-                    page: 64,
-                    excerpt: "In adults with T2D and high cardiovascular risk, SGLT2 inhibitors or GLP-1 RAs with proven CVD benefit are recommended independent of baseline A1C."
-                };
-            } else if (q.includes("hypertension") || q.includes("blood pressure") || q.includes("bp")) {
-                aiResponse = "Under current ACC/AHA Hypertension Protocols, Stage 1 HTN (130-139 / 80-89 mmHg) with an estimated 10-year ASCVD risk ≥10% warrants prompt initiation of first-line antihypertensive medication (thiazide diuretic, CCB, or ACEi/ARB).";
-                citation = {
-                    id: `c-${Date.now()}`,
-                    doc: "ACC/AHA High Blood Pressure Clinical Practice Guideline",
-                    page: 29,
-                    excerpt: "Simultaneous initiation of two first-line agents of different classes is recommended for Stage 2 HTN with average BP >20/10 mmHg above goal."
-                };
-            }
-
-            setMessages(prev => [
-                ...prev,
-                {
-                    id: (Date.now() + 1).toString(),
-                    role: "ai",
-                    text: aiResponse,
-                    citations: [citation]
-                }
-            ]);
-            setIsSearching(false);
-        }, 1200);
-    };
+    const response = await fetch(`${process.env.NEXT_PUBLIC_AI_BACKEND_URL}/api/rag/chat`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-API-Key": process.env.NEXT_PUBLIC_INTERNAL_API_KEY || "internal-shared-secret",
+        },
+        body: JSON.stringify({ query }),
+    });
 
     return (
         <div className="flex h-screen bg-[var(--color-background)] font-sans overflow-hidden">
